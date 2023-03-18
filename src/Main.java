@@ -13,7 +13,7 @@ public class Main {
                     FileReader.read(command);// Считать все отчёты, в зависимости от команды 1(месяц) 2 (Год)
                     break;
 
-                case "3": if(!FileReader.Month.isEmpty() || !FileReader.Year.isEmpty()){ // Проверка на предварительный счет данных, аналогично в 4 и 5 команде.
+                case "3": if(!FileReader.Month.isEmpty() && !FileReader.Year.isEmpty()){ // Проверка на предварительный счет данных, аналогично в 4 и 5 команде.
                     DataChecker.printChecker();// Сверить отчёты
                 } else {
                     Menu.errormenu();

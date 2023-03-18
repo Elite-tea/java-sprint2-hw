@@ -12,14 +12,16 @@ static HashMap<String, ArrayList<SaveReport>> Month = new HashMap<>();// Хеш�
 static HashMap<String, ArrayList<SaveReport>> Year = new HashMap<>();// Хешмапа для хранения годовых отчетов
 
   public static void read(String command) {
-        int number = 4; // Взял 4 т.к требуется всего 3 месяца, и + 1 что бы проверить ошибку.
+        int number = 0; // Объявляем счетчик с дефолтным значением 0.
         String patch = null;
         String result;
 
         // Шаблоны названий файлов для комманд 1(Месяц) и 2(Год)
         if (command.equals("1")) {
+            number = 3; // По условию  всего 3 месяца, сравнивать и будем с 3 месяцами.
             patch = "resources/m.20210";
         } else if (command.equals("2")) {
+            number = 1; // По условию 1 год, присваиваем 1 в счетчик.
             patch = "resources/y.202";
         }
 
@@ -42,24 +44,22 @@ static HashMap<String, ArrayList<SaveReport>> Year = new HashMap<>();// Хешм
                     data.add(saveReport);
                 }
 
-                else if(command.equals("2")) {// Все тоже самое что и блоком выше, но для годичного отчета
-                    int quantity = 0;
-                    String name = content[0];
+                else {// Все тоже самое что и блоком выше, но для годичного отчета
+                    String month = content[0];
                     int summa = Integer.parseInt(content[1]);
                     boolean expense = Boolean.parseBoolean(content[2]);
 
-                    SaveReport saveReport = new SaveReport(name, expense, quantity, summa);
+                    SaveReport saveReport = new SaveReport(month, expense, summa);
                     data.add(saveReport);
                 }
             }
+            String[] name = result.split("[.]"); // Получаем имя для ключа в мапе
             if (command.equals("1")) {// Сохраняем данные в мапу для месяца
-                String[] name = result.split("[.]");
                 if (data.size() != 0) {
                     Month.put(name[1], data);
                 }
             }
-            else if (command.equals("2")) {// Сохраняем данные в мапу для Года
-                String[] name = result.split("[.]");
+            else {// Сохраняем данные в мапу для Года
                 if (data.size() != 0) {
                     Year.put(name[1], data);
                 }

@@ -61,9 +61,9 @@ public class DataReport {
         System.out.println("Год " + year);
         for (SaveReport report : saveReportYear) { // Разбиваем отчет на траты и доходы
             if (report.expense) {
-                expense.put(Integer.parseInt(report.name), report.summa);
+                expense.put(Integer.parseInt(report.month), report.summa);
             } else {
-                income.put(Integer.parseInt(report.name), report.summa);
+                income.put(Integer.parseInt(report.month), report.summa);
             }
         }
             for (int i = 1; i <= expense.size(); i++){ // Печать отчета за каждый месяц

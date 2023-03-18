@@ -8,7 +8,6 @@ public class DataChecker {
     static int year;
 
     public static void printChecker() {
-
         for (String years : FileReader.Year.keySet()) { // Проходим и получаем информацию по году
             year = Integer.parseInt(years);
             saveReportYear = FileReader.Year.get(years);
@@ -20,7 +19,7 @@ public class DataChecker {
             for (String month : FileReader.Month.keySet()) { // Проходимся по годам
                 HashMap<String, Integer> checkExpense = new HashMap<>();
                 HashMap<String, Integer> checkIncome = new HashMap<>();
-                String[] name = month.split("2021");
+               String[] name = month.split("2021");
                 saveReportMonth = FileReader.Month.get(month);
                 checker(checkExpense, checkIncome, name[1]);
             }
@@ -30,7 +29,6 @@ public class DataChecker {
             }
 
         }
-
 
     public static void checker(HashMap<String, Integer> checkExpense, HashMap<String, Integer> checkIncome, String month) { // Рассчет сверки отчетов
         for (SaveReport saveReport : saveReportMonth) { // Разбиваем месяц на доходы и расходы.
@@ -42,7 +40,7 @@ public class DataChecker {
         }
 
         for (SaveReport saveReport : saveReportYear) {// Сверяем отчеты
-            if(saveReport.name.equals(month)) {
+            if(saveReport.month.equals(month)) {
                 if ((!saveReport.expense && saveReport.summa == checkIncome.get("Income")) || (saveReport.expense && saveReport.summa == checkExpense.get("Expense"))) {
                     resultExamination.add(true);
                 } else {
@@ -52,15 +50,5 @@ public class DataChecker {
             }
 
         }
-
-
-//    Сверка данных — это проверка, что данные в двух и более разных источниках не противоречат друг другу.
-//    В данном случае при сверке данных вам нужно проверить, что информация по месяцу в годовом отчёте не противоречит информации в месячном отчёте.
-//    При вызове сверки данных программа должна:
-//    Подсчитывать две суммы: общие доходы и общие расходы по каждому из месяцев.
-//    Сверять полученные суммы с суммой доходов и расходов в отчёте по году.
-//    Если обнаружена ошибка, программа должна выводить месяц, в котором обнаружено несоответствие.
-//    Если ошибок не обнаружено, должна выводиться только информация об успешном завершении операции.
     }
 }
-
